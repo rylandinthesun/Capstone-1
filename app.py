@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, session, flash
+import requests
 
 app = Flask(__name__)
 
@@ -11,3 +12,4 @@ def show_page():
 def redirect_page():
 
     return '<h1>Redirect</h1>'
+

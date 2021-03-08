@@ -4,7 +4,7 @@
 
 2. The demographic of the users will be music fans, lyric fans, and lyricists. 
 
-3. I plan on using the musicxmatch API.. Data I would like to obtain is lyrics of a song, the name of the song/artist/album, and also the album artwork for the given album. Would possibly use the Spotify/Apple Music/YouTube API to provide links to audio of the song being searched as well.
+3. I plan on using the Genius API. Data I would like to obtain is lyrics of a song, the name of the song/artist/album, and also the album artwork for the given album. Would possibly use the Spotify/Apple Music/YouTube API to provide links to audio of the song being searched as well.
 
 4. a.  ![Lyrically Shecma](https://github.com/rylandinthesun/Lyrically/blob/main/lyrically_schema.png)
 
