@@ -4,9 +4,9 @@
 
 2. The demographic of the users will be music fans, lyric fans, and lyricists. 
 
-3. I plan on using the Genius API or possibly the Lyrics.Ovh API. Data I would like to obtain is lyrics of a song, the name of the song/artist/album, and also the album artwork for the given album. Would possibly use the Spotify/Apple Music/YouTube API to provide links to audio of the song being searched as well.
+3. I plan on using the musicxmatch API.. Data I would like to obtain is lyrics of a song, the name of the song/artist/album, and also the album artwork for the given album. Would possibly use the Spotify/Apple Music/YouTube API to provide links to audio of the song being searched as well.
 
-4. a.  ![Lyrically Shecma](Desktop/lyrically/lyrically_schema.png)
+4. a.  ![Lyrically Shecma](https://github.com/rylandinthesun/Lyrically/blob/main/lyrically_schema.png)
 
    b.  Issues I might run into with the Genius API is with the AOuth for authentication. I will have to look more into that before I decide if I want to use it since it seems like if I am wanting to use the API, then users will technically be logged in to my account with the token that was provided. I’ll have to do more research into that.
    
