@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.3/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <title>Lyrically</title>
+</head>
+<body class="h-full overflow-auto bg-gradient-to-r from-purple-100 to-purple-200">
+
+    <nav class="fixed font-sans flex flex-row text-left justify-between py-3 px-5 bg-white shadow-md items-baseline w-full">
+        <div class="mb-2 sm:mb-0">
+          <a href="/" class="text-3xl no-underline text-purple-500 hover:text-purple-600">Lyrically</a>
+        </div>
+        <div>
+          <a href="/login" class="text-lg align-middle no-underline text-purple-500 hover:text-purple-600 ml-2">Login</a>
+          <a href="/register" class="text-lg align-middle no-underline text-purple-500 hover:text-purple-600 ml-2">Sign Up</a>
+        </div>
+      </nav>
+
+    <div class="container mx-auto">
+
+    {% block content %}
+    {% endblock %}
+
+    </div>
+        
+
+    <footer class="bg-white text-center py-2">
+        <p class="text-sm text-purple-400">Created by Ryland Oehlers &#169; 2021</p>
+    </footer>
+    
+</body>
+</html>

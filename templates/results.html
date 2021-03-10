@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="flex m-auto h-auto">
+    <div class="flex m-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-12 mt-28 mb-10">
+            {% for result in results %}
+            <a href="#">
+                <div class="bg-white shadow-lg px-6 py-6 rounded-lg h-full w-80">
+                    <img class="border border-gray-200 object-contain h-70 w-70" src="{{ result["result"]["header_image_thumbnail_url"] }}" alt="">
+                    <div class="flex items-center justify-between mt-3">
+                        <div>
+                            <p class="text font-semibold text-purple-800">"{{ result["result"]["title"] }}"</p>
+                            <p class="text-sm text-purple-600">{{ result["result"]["primary_artist"]["name"] }}</p>
+                        </div>
+                        <img class="w-10 h-10  rounded-full" src="{{ result["result"]["primary_artist"]["image_url"] }}" alt="">
+                    </div>
+                    <div class="flex items-center justify-between mt-10">
+                        <i class="far fa-lg fa-heart text-purple-500"></i>
+                        <i class="far fa-lg fa-bookmark text-purple-500"></i>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+                        
+{% endblock %}
+            
+            
+            
+               
