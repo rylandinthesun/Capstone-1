@@ -7,15 +7,15 @@
     <div class="flex m-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-12 mt-28 mb-10">
             {% for result in results %}
-            <a href="#">
-                <div class="bg-white shadow-lg px-6 py-6 rounded-lg h-full w-80">
-                    <img class="border border-gray-200 object-contain h-70 w-70" src="{{ result["result"]["header_image_thumbnail_url"] }}" alt="">
+            <a href="/lyrics{{ result["result"]["path"] }}">
+                <div class="group bg-white shadow hover:bg-purple-300 hover:shadow-xl px-6 py-6 rounded-lg h-full w-64">
+                    <img class="border border-purple-100 object-contain h-70 w-70" src="{{ result["result"]["header_image_thumbnail_url"] }}" alt="">
                     <div class="flex items-center justify-between mt-3">
                         <div>
                             <p class="text font-semibold text-purple-800">"{{ result["result"]["title"] }}"</p>
                             <p class="text-sm text-purple-600">{{ result["result"]["primary_artist"]["name"] }}</p>
                         </div>
-                        <img class="w-10 h-10  rounded-full" src="{{ result["result"]["primary_artist"]["image_url"] }}" alt="">
+                        <img class="w-10 h-10 border border-purple-600 rounded-full" src="{{ result["result"]["primary_artist"]["image_url"] }}" alt="">
                     </div>
                     <div class="flex items-center justify-between mt-10">
                         <i class="far fa-lg fa-heart text-purple-500"></i>
@@ -25,6 +25,16 @@
             </a>
             {% endfor %}
         </div>
+    </div>
+</div>
+
+<div class="flex h-auto items-center align-middle">
+    <div class="m-auto mt-40">
+            <p class="text-lg text-center md:text-left tracking-tight mb-3 text-purple-400">What lyrics are you looking for?</p>
+            <form action="/search" id="search_form" class="flex justify-end">
+                <input class="md:text-lg px-3 py-5 placeholder-purple-200 focus:text-purple-500  bg-white rounded-lg text-base shadow-lg outline-none focus:outline-none focus:shadow-outline mb-60 w-80 md:w-96" type="text" name="search" id="search-form" placeholder="Type in the lyrics, artist, or song." required>
+                <button type="submit" class="md:text-lg absolute bg-purple-500 hover:bg-purple-600 focus:bg-purple-800 text-white py-4 px-1 md:px-3 mt-1 mr-1 rounded-r-lg outline-none">Search</button>
+            </form>
     </div>
 </div>
                         

@@ -10,17 +10,33 @@
 </head>
 <body class="h-full overflow-auto bg-gradient-to-r from-purple-100 to-purple-200">
 
-    <nav class="fixed font-sans flex flex-row text-left justify-between py-3 px-5 bg-white shadow-md items-baseline w-full">
-        <div class="mb-2 sm:mb-0">
-          <a href="/" class="text-3xl no-underline text-purple-500 hover:text-purple-600">Lyrically</a>
+    <nav class="fixed font-sans flex flex-row text-left justify-between py-4 px-5 bg-white shadow-md items-baseline w-full" style="z-index: 999;">
+        <div class="">
+          <a href="/" class="text-2xl md:text-3xl no-underline text-purple-500 hover:text-purple-600">Lyrically</a>
         </div>
-        <div>
-          <a href="/login" class="text-lg align-middle no-underline text-purple-500 hover:text-purple-600 ml-2">Login</a>
-          <a href="/register" class="text-lg align-middle no-underline text-purple-500 hover:text-purple-600 ml-2">Sign Up</a>
+        <div class="align-middle">
+          {% if not g.user %}
+          <a href="/login" class="text-sm md:text-base no-underline text-purple-500 hover:text-purple-600 ml-1">Login</a>
+          <a href="/register" class="text-sm md:text-base no-underline text-purple-500 hover:text-purple-600 ml-1">Sign Up</a>
+          {% else %}
+          <a href="/logout" class="text-sm md:text-base no-underline text-purple-500 hover:text-purple-600 ml-1">Logout</a>
+          <a href="/profile/{{g.user.id}}" class="text-sm md:text-base no-underline text-purple-500 hover:text-purple-600 ml-1">Profile</a>
+          {% endif %}
+          <a href="#search_form" class="text-sm md:text-base no-underline text-purple-500  hover:text-purple-600 ml-1"><i class="fas fa-search"></i></a>
         </div>
       </nav>
 
     <div class="container mx-auto">
+
+    <div class="pt-20">
+      {% for msg in get_flashed_messages() %}
+      <div class="bg-purple-300 border border-purple-500 text-purple-800 px-4 py-3 rounded-lg relative" role="alert">
+        <span class="block sm:inline">{{ msg }}</span>
+        <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+        </span>
+      </div>
+      {% endfor %}
+    </div>
 
     {% block content %}
     {% endblock %}
@@ -34,3 +50,4 @@
     
 </body>
 </html>
+          

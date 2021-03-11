@@ -21,29 +21,29 @@ class User(db.Model):
     first_name = db.Column(db.Text)
     last_name = db.Column(db.Text)
     bio = db.Column(db.Text)
-    likes = db.relationship("Lyrics", secondary="likes")
+    likes = db.relationship("Lyric", secondary="likes")
+    saves = db.relationship("Lyric", secondary="saves")
 
     @classmethod
-    def signup(cls, username, email, password, image_url):
+    def signup(cls, email, password, username):
         """Sign up user by Hashing password and adding user to system."""
 
         hashed_pwd = bcrypt.generate_password_hash(password).decode('UTF-8')
 
         user = User(
-            username=username,
             email=email,
             password=hashed_pwd,
-            image_url=image_url,
+            username=username,
         )
 
         db.session.add(user)
         return user
 
     @classmethod
-    def authenticate(cls, username, password):
+    def authenticate(cls, email, password):
         """Find user with `username` and `password`."""
 
-        user = cls.query.filter_by(username=username).first()
+        user = cls.query.filter_by(email=email).first()
 
         if user:
             is_auth = bcrypt.check_password_hash(user.password, password)
@@ -63,4 +63,23 @@ class Lyric(db.Model):
     track_name = db.Column(db.Text, nullable=False)
     artist_name = db.Column(db.Text, nullable=False)
     album_name = db.Column(db.Text, nullable=False)
-    album_image = db.Column(db.Text, nullable=False) 
+    album_image = db.Column(db.Text, nullable=False)
+    
+
+class Like(db.Model):
+    """Table to connect user to each lyrics they like."""
+
+    __tablename__ = "likes"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'))
+    lyric_id = db.Column(db.Integer, db.ForeignKey('lyrics.id', ondelete='cascade'), unique=True)
+
+class Save(db.Model):
+    """Table to connect user to lyrics they want to save."""
+
+    __tablename__ = "saves"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'))
+    lyric_id = db.Column(db.Integer, db.ForeignKey('lyrics.id', ondelete='cascade'), unique=True)
