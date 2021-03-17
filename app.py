@@ -10,7 +10,7 @@ from forms import AddUserForm, LoginForm, EditUserForm, RatingForm, UpdateRating
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres:///lyrically'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', "postgres:///lyrically")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "b4e770dbe0a5904fbb11f744")
