@@ -8,10 +8,10 @@
     <p class="text-center text-2xl text-purple-800 mt-10">{{user.username}}'s Saved Lyrics</p>
 </div>
 
-<div class="flex m-auto items-center h-screen">
+<div class="flex m-auto items-center h-full">
     <div class="flex m-auto w-80 md:w-full">
         <div class="grid grid-cols-1 mt-3 mb-3 w-80 md:w-full">
-            {% for save in user.saves %}
+            {% for save in user.saves|sort(attribute='artist_name') %}
             
             <a href="/lyrics/{{ save.path }}">
                 <div class="group bg-white shadow hover:bg-purple-300 hover:shadow-xl px-2 py-2 rounded-lg mt-2 mb-2 transition ease-in">
@@ -43,7 +43,7 @@
 
 {% endif %}
 
-<div class="flex h-auto items-center align-middle">
+<div class="flex h-full items-center align-middle">
     <div class="m-auto mt-40">
             <p class="text-lg text-center md:text-left tracking-tight mb-3 text-purple-400">What lyrics are you looking for?</p>
             <form action="/search" id="search_form" class="flex justify-end">
