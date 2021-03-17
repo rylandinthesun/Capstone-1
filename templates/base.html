@@ -10,28 +10,35 @@
 </head>
 <body class="h-full overflow-auto bg-gradient-to-r from-purple-100 to-purple-200">
 
-    <nav class="fixed font-sans flex flex-row text-left justify-between py-4 px-5 bg-white shadow-md items-baseline w-full" style="z-index: 999;">
-        <div class="">
-          <a href="/" class="text-2xl md:text-3xl no-underline text-purple-500 hover:text-purple-600">Lyrically</a>
+    <nav class="fixed font-sans flex flex-row py-4 px-5 justify-between bg-purple-800 hover:bg-white text-white hover:text-purple-600 transition ease-in hover:shadow items-baseline w-full" style="z-index: 999;">
+        <div class="flex items-center justify-start">
+          <a href="#search_form" class="text-xl md:text-2xl hover:text-purple-900 no-underline px-1 md:px-2"><i class="fas fa-search"></i></a>
         </div>
-        <div class="align-middle">
+        <div class="flex items-center justify-center text-center">
+          <a href="/" class="text-2xl md:text-3xl no-underline hover:text-purple-900">Lyrically</a>
+        </div>
+        <div class="flex items-end">
+          
           {% if not g.user %}
-          <a href="/login" class="text-sm md:text-base no-underline text-purple-500 hover:text-purple-600 ml-1">Login</a>
-          <a href="/register" class="text-sm md:text-base no-underline text-purple-500 hover:text-purple-600 ml-1">Sign Up</a>
+          <a href="/register" class="text-xl md:text-2xl no-underline hover:text-purple-900 px-1 md:px-2"><i class="fas fa-user-plus"></i></a>
+          <a href="/login" class="text-xl md:text-2xl no-underline hover:text-purple-900 px-1 md:px-2"><i class="fas fa-sign-in-alt"></i></a>
           {% else %}
-          <a href="/logout" class="text-sm md:text-base no-underline text-purple-500 hover:text-purple-600 ml-1">Logout</a>
-          <a href="/profile/{{g.user.id}}" class="text-sm md:text-base no-underline text-purple-500 hover:text-purple-600 ml-1">Profile</a>
+          
+          <a href="/profile/{{g.user.id}}" class="text-xl md:text-2xl no-underline hover:text-purple-900 px-1 md:px-2  md:pb-0"><i class="far fa-user"></i></a>
+          <a href="/saves/{{g.user.id}}" class="text-xl md:text-2xl no-underline hover:text-purple-900 px-1 md:px-2"><i class="far fa-save"></i></a>
+          <a href="/logout" class="text-xl md:text-2xl no-underline hover:text-purple-900 px-1 md:px-2"><i class="fas fa-sign-out-alt"></i></a>
+          
           {% endif %}
-          <a href="#search_form" class="text-sm md:text-base no-underline text-purple-500  hover:text-purple-600 ml-1"><i class="fas fa-search"></i></a>
+          
         </div>
       </nav>
 
-    <div class="container mx-auto">
+    <div class="container max-w-lg md:max-w-xl lg:max-w-4xl mx-auto">
 
-    <div class="pt-20">
+    <div class="pt-20 flex items-center justify-center">
       {% for msg in get_flashed_messages() %}
-      <div class="bg-purple-300 border border-purple-500 text-purple-800 px-4 py-3 rounded-lg relative" role="alert">
-        <span class="block sm:inline">{{ msg }}</span>
+      <div class="bg-purple-300 border border-purple-500 text-purple-800 w-80 md:w-screen px-4 py-3 rounded-lg relative" role="alert">
+        <span class="block text-center sm:inline">{{ msg }}</span>
         <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
         </span>
       </div>

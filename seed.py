@@ -1,5 +1,5 @@
 from app import db
-from models import User, Lyric, Like, Save
+from models import User, Lyric, Rating, Save
 
 
 db.drop_all()

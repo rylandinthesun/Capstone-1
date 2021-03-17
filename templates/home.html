@@ -5,8 +5,11 @@
 
     <div class="flex h-screen items-center">
         <div class="m-auto">
-            <p class="text-8xl md:text-9xl tracking-tighter font-sans font-extrabold text-purple-800 text-center md:text-left mt-10">Lyrically</p>
-            <p class="text-xl tracking-tight mt-3 text-purple-500 text-center md:text-left">Search, save, and like lyrics from your<br>favorite artists around the world.</p>
+            <div class="text-center mb-2">
+                <p class="text-6xl bg-purple-800 inline font-bold px-5 pb-1 shadow-xl rounded-lg text-white">L</p>
+            </div>
+            <p class="text-8xl md:text-9xl tracking-tighter font-sans font-extrabold text-purple-800 text-center md:text-left">Lyrically</p>
+            <p class="text-xl tracking-tight mt-3 text-purple-500 text-center md:text-left">Search, save, and rate lyrics from your<br> favorite artists around the world.</p>
         </div>
     </div>
 
@@ -14,9 +17,9 @@
     <div class="flex h-auto items-center align-middle">
         <div class="m-auto">
                 <p class="text-lg text-center md:text-left tracking-tight mb-3 text-purple-400">What lyrics are you looking for?</p>
-                <form action="/search" id="search_form" class="flex justify-end">
-                    <input class="md:text-lg px-3 py-5 placeholder-purple-200 focus:text-purple-500  bg-white rounded-lg text-base shadow-lg outline-none focus:outline-none focus:shadow-outline mb-60 w-80 md:w-96" type="text" name="search" id="search-form" placeholder="Type in the lyrics, artist, or song." required>
-                    <button type="submit" class="md:text-lg absolute bg-purple-500 hover:bg-purple-600 focus:bg-purple-800 text-white py-4 px-1 md:px-3 mt-1 mr-1 rounded-r-lg outline-none">Search</button>
+                <form action="/search" method="GET" id="search_form" class="flex justify-end">
+                    <input class="md:text-lg px-3 py-5 placeholder-purple-200 focus:text-purple-500  bg-white rounded-lg text-base shadow-lg outline-none focus:outline-none focus:shadow-outline mb-80 w-80 md:w-96" type="text" name="q" placeholder="Type in the lyrics, artist, or song." required>
+                    <button type="submit" class="md:text-lg absolute bg-purple-500 hover:bg-purple-800 focus:bg-purple-800 text-white py-4 px-1 md:px-3 mt-1 mr-1 rounded-r-lg outline-none transition ease-in">Search</button>
                 </form>
         </div>
     </div>

@@ -2,29 +2,79 @@
 
 {% block content %}
 
+{% for lyric in lyrics %}
 
-<div class="flex m-auto h-full">
-    <div class="m-auto mt-32">
-        <div class="bg-white rounded-lg px-2 md:px-8 pb-6 shadow-lg">
-            <pre class="">
-                <p class="text-purple-600 text-center text-xs md:text-sm font-sans tracking-tighter">{{lyrics}}</p>
-            </pre>
-            <div class="flex items-center justify-between px-2">
-                <i class="far fa-lg fa-heart text-purple-500"></i>
-                <i class="far fa-lg fa-bookmark text-purple-500"></i>
+
+<div class="flex m-auto items-center justify-center h-full">
+    <div class="w-80 md:w-full lg:w-full mt-10">
+        <div class="bg-white rounded-lg px-4 pb-6 shadow-lg">
+            <div class="flex items-center justify-center md:justify-end px-2 py-6">
+                {% if lyric in g.user.saves %}
+                <form action="/lyrics/remove_save/{{ lyric.id }}" method="POST">
+                    <button class="focus:outline-none text-2xl md:text-3xl"><i class="fas  fa-bookmark text-purple-500"></i></button>
+                </form>
+                {% else %}
+                <form action="/lyrics/add_save/{{ lyric.id }}" method="POST">
+                    <button class="focus:outline-none text-2xl md:text-3xl"><i class="far fa-bookmark text-purple-500"></i></button>
+                </form>
+                {% endif %}
             </div>
-        </div>
-        
+            <p class="text-center text-purple-800 text-3xl md:text-4xl">"{{lyric.track_name}}"</p>
+            <p class="text-center text-purple-600 text-xl md:text-2xl font-light pt-2">{{lyric.artist_name}}</p>
+            <div style="white-space: pre-line;">
+                <p class="text-purple-600 text-center text-xs md:text-base font-sans tracking-tighter">{{lyric.lyrics}}</p>
+            </div>
+            <p class="text-center text-sm md:text-base mb-6 italic text-purple-300">From the album: "{{lyric.album_name}}"</p>
+            <div class="">
+                {% if g.user %}
+                
+                
+                {% if lyric.ratings %}
+                <p class="text-center text-xs md:text-sm text-purple-500">Your Rating:</p>
+                    {% for rating in lyric.ratings %}
+                    <div class="text-xl text-center text-purple-500">
+                        
+                        {% for i in range(rating.rating) %}
+                            <i class="fas fa-star"></i>
+                        {% endfor %}
+                        {% if rating.rating > 5 %}
+                        {% set x = 5 - rating.rating %}
+                        {% endif %}
+                    </div>
+                <div class="flex items-center justify-center mt-10 mb-4">
+                    <a href="/update_rating/{{ rating.id }}" class="px-3 py-3 bg-white rounded-lg shadow-lg text-white bg-purple-700 hover:bg-purple-900 focus:bg-purple-900 transition ease-in">Update Rating</a>
+                </div>
+                    {% endfor %}
+                    {% else %}
+                <div class="flex items-center justify-center mt-10 mb-4">
+                    <a href="/rating/{{ lyric.id }}" class="px-3 py-3 bg-white rounded-lg shadow-lg text-white bg-purple-700 hover:bg-purple-900 focus:bg-purple-900 transition ease-in">Rate Lyrics</a>
+                </div>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div> 
     </div>
 </div>
+                
+                        
+                        
+
+                    
+
+<div class="flex m-auto items-center justify-center text-center mt-20">
+    <div class="">
+        <a href="/search?q={{lyric.artist_name}}" class="px-4 py-4 bg-white rounded-lg shadow-lg text-white text-lg bg-purple-500 hover:bg-purple-800 focus:bg-purple-900 transition ease-in">More from <strong>{{lyric.artist_name}}</strong></a>
+    </div>
+</div>
+{% endfor %}
 
 
 <div class="flex h-auto items-center align-middle">
     <div class="m-auto mt-40">
             <p class="text-lg text-center md:text-left tracking-tight mb-3 text-purple-400">What lyrics are you looking for?</p>
             <form action="/search" id="search_form" class="flex justify-end">
-                <input class="md:text-lg px-3 py-5 placeholder-purple-200 focus:text-purple-500  bg-white rounded-lg text-base shadow-lg outline-none focus:outline-none focus:shadow-outline mb-60 w-80 md:w-96" type="text" name="search" id="search-form" placeholder="Type in the lyrics, artist, or song." required>
-                <button type="submit" class="md:text-lg absolute bg-purple-500 hover:bg-purple-600 focus:bg-purple-800 text-white py-4 px-1 md:px-3 mt-1 mr-1 rounded-r-lg outline-none">Search</button>
+                <input class="md:text-lg px-3 py-5 placeholder-purple-200 focus:text-purple-500  bg-white rounded-lg text-base shadow-lg outline-none focus:outline-none focus:shadow-outline mb-60 w-80 md:w-96" type="text" name="q" id="search-form" placeholder="Type in the lyrics, artist, or song." required>
+                <button type="submit" class="md:text-lg absolute bg-purple-500 hover:bg-purple-800 focus:bg-purple-800 text-white py-4 px-1 md:px-3 mt-1 mr-1 rounded-r-lg outline-none transition ease-in">Search</button>
             </form>
     </div>
 </div>

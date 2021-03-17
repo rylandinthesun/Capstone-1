@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<div class="flex m-auto items-center justify-center h-screen">
+    <div class="w-80 md:w-full lg:w-full mt-10">
+        <div class="bg-white rounded-lg px-4 pb-6 shadow-lg">
+            <p class="text-3xl md:text-4xl text-purple-800 text-center pt-6">"{{rating.lyric.track_name}}"</p>
+            <p class="text-xl md:text-2xl text-purple-600 text-center pt-2">{{rating.lyric.artist_name}}</p>
+            <div>
+                <form method="POST">
+                    <div class="">
+                        {{ form.hidden_tag() }}
+    
+                        {% for field in form
+                            if field.widget.input_type != 'hidden' %}
+                        <div class="mb-10 mt-6 w-80 md:w-96 flex m-auto items-center justify-center">
+                            
+                            {{ field(class_="text-purple-600") }}
+    
+                            {% for error in field.errors %}
+                            <span class="">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                        <div class="flex items-center justify-center">
+                            <button class="bg-purple-500 hover:bg-purple-800 focus:bg-purple-900 text-white font-bold py-4 px-3 rounded-lg w-80 md:w-full text-lg transition ease-in mr-2" type="submit">Update</button>
+                            <a href="/delete_rating/{{ rating.id }}" class="bg-gray-500 text-center hover:bg-gray-800 focus:bg-gray-900 cursor-pointer text-white font-bold py-4 px-3 rounded-lg w-80 md:w-full text-lg transition ease-in ml-2" type="submit">Delete</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div> 
+    </div>
+</div>
+        
+
+
+
+<div class="flex h-auto items-center align-middle">
+    <div class="m-auto mt-40">
+            <p class="text-lg text-center md:text-left tracking-tight mb-3 text-purple-400">What lyrics are you looking for?</p>
+            <form action="/search" id="search_form" class="flex justify-end">
+                <input class="md:text-lg px-3 py-5 placeholder-purple-200 focus:text-purple-500  bg-white rounded-lg text-base shadow-lg outline-none focus:outline-none focus:shadow-outline mb-60 w-80 md:w-96" type="text" name="q" id="search-form" placeholder="Type in the lyrics, artist, or song." required>
+                <button type="submit" class="md:text-lg absolute bg-purple-500 hover:bg-purple-800 focus:bg-purple-800 text-white py-4 px-1 md:px-3 mt-1 mr-1 rounded-r-lg outline-none transition ease-in">Search</button>
+            </form>
+    </div>
+</div>
+        
+
+{% endblock %}

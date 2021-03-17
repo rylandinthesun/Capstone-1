@@ -2,5 +2,87 @@
 
 {% block content %}
 
-<h1>{{user.username}}</h1>
+<div class="flex m-auto items-center h-full">
+    <div class="m-auto">
+        <div class="w-76 md:w-96 bg-white shadow-lg rounded-lg overflow-hidden my-4">
+            <div class="">
+                <div class="flex items-center justify-center bg-purple-600 px-8 gap-2">
+                    <img class="w-16 h-16 border border-purple-600 object-cover rounded-full" src="{{ user.image_url }}" alt="">
+                    <p class="text-3xl text-center text-white pt-4 pb-10 mt-4">{{user.username}}</p>
+                </div>
+            </div>
+    
+            <div class="py-4 px-6">
+                <h1 class="text-2xl font-semibold text-purple-800">{{user.first_name}} {{user.last_name}}</h1>
+                <p class="py-2 text-lg text-purple-500">"{{user.bio}}"</p>
+                <div class="flex items-center text-center mt-3 text-purple-700">
+                    <i class="far fa-lg fa-envelope"></i> 
+                    <p class="px-2">{{user.email}}</p>
+                </div>
+            
+                <div class="flex items-center justify-center mt-4 text-gray-700">
+                    {% if g.user.id == user.id %}
+                    <a class="bg-purple-500 hover:bg-purple-800 focus:bg-purple-900 text-white font-bold py-2 px-2 mx-1 rounded-lg transition ease-in" href="/profile/edit">Edit</a>
+                    
+                    <a href="/delete_confim" class="bg-purple-500 hover:bg-purple-800 focus:bg-purple-900 text-white font-bold py-2 px-2 mx-1 rounded-lg transition ease-in">Delete</a>
+                    
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="flex m-auto items-center justify-center">
+    <p class="text-center text-2xl text-purple-800 mt-10">{{user.username}}'s Rated Lyrics</p>
+</div>
+    
+
+{% if g.user.id == user.id %}
+
+<div class="flex m-auto items-center">
+    <div class="flex m-auto w-80 md:w-full">
+        <div class="grid grid-cols-1 mt-3 mb-3 w-80 md:w-full">
+            {% for rate in g.user.ratings|sort(attribute='rating', reverse = True) %}
+            
+            <a href="/lyrics/{{ rate.lyric.path }}">
+                <div class="group bg-white shadow hover:bg-purple-300 hover:shadow-xl px-2 py-2 rounded-lg mt-2 mb-2 transition ease-in">
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="px-4 flex-1">
+                            <p class="text-sm md:text-base font-semibold text-purple-800">"{{ rate.lyric.track_name }}"</p>
+                            <p class="text-xs md:text-sm text-purple-600">{{ rate.lyric.artist_name }}</p>
+                        </div>
+                            
+                            {% if rate.user_id == g.user.id %}
+                            <div class="text-xs md:text-lg text-purple-500 mr-4">
+                                {% for i in range(rate.rating) %}
+                                <i class="fas fa-star"></i>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                        
+                        <img class="border border-purple-100 object-cover" src="{{ rate.lyric.album_image }}" style="width: 70px; height: 70px;" alt="">
+                    </div>
+                </div>
+            </a>
+            
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+<div class="flex h-auto items-center align-middle">
+    <div class="m-auto mt-40">
+            <p class="text-lg text-center md:text-left tracking-tight mb-3 text-purple-400">What lyrics are you looking for?</p>
+            <form action="/search" id="search_form" class="flex justify-end">
+                <input class="md:text-lg px-3 py-5 placeholder-purple-200 focus:text-purple-500  bg-white rounded-lg text-base shadow-lg outline-none focus:outline-none focus:shadow-outline mb-60 w-80 md:w-96" type="text" name="q" id="search-form" placeholder="Type in the lyrics, artist, or song." required>
+                <button type="submit" class="md:text-lg absolute bg-purple-500 hover:bg-purple-800 focus:bg-purple-800 text-white py-4 px-1 md:px-3 mt-1 mr-1 rounded-r-lg outline-none transition ease-in">Search</button>
+            </form>
+    </div>
+</div>
+        
 {% endblock %}
